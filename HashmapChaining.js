@@ -1,5 +1,6 @@
 import LinkedList from './LinkedList'
 
+
 class HashMapChaining {
     constructor(initialCapacity=8){
         this.length = 0;
@@ -10,9 +11,8 @@ class HashMapChaining {
     }
 
     get(key) {
-        const idnex = this._findSlot(key);
+        const index = this._findSlot(key);
         if (this._hashTable[index] === undefined) {
-            throw new Error('Key error');
             return null;
         }
         let values = []
@@ -26,7 +26,7 @@ class HashMapChaining {
     };
 
     set(key, value) {
-        const loadRatio = (this.length + this._deleted + 1 / this._capacity);
+        const loadRatio = (this.length + this._deleted + 1) / this._capacity;
         if (loadRatio > HashMapChaining.MAX_LOAD_RATIO) {
             this._resize(this._capacity * HashMapChaining.SIZE_RATIO);
         }
@@ -54,7 +54,7 @@ class HashMapChaining {
     };
 
     _findSlot(key) {
-        const hash = HashMap._hashString(key)
+        const hash = HashMapChaining._hashString(key)
         const index = hash % this._capacity;
         
         // since we're going to use this location and build a linked list
